@@ -10,7 +10,14 @@
   }
 }
 
-
+/* Supprime le rectangle bleu sur mobile */
+img, img:active, img:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 .card {
   display: flex;
   flex-direction: column;
