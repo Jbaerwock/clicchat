@@ -1,6 +1,30 @@
-.jersey-10-regular {
+@media screen and (min-width: 601px) {
+  h1 {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+}
+.card {
+  display: flex;
+  flex-direction: column;   /* empile image + texte */
+  align-items: center;      /* centre horizontalement */
+  text-align: center;       /* centre le texte */
+}
+
+.card img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.card h1 {
+  margin-top: 2px;
   font-family: "Jersey 10", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 16px
 }
