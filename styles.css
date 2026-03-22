@@ -9,17 +9,20 @@
     font-size: 100px;
   }
 }
+
+
 .card {
   display: flex;
-  flex-direction: column;   /* empile image + texte */
-  align-items: center;      /* centre horizontalement */
-  text-align: center;       /* centre le texte */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card img {
   width: 100%;
   max-width: 400px;
   height: auto;
+  cursor: pointer;
 }
 
 .card h1 {
@@ -27,4 +30,31 @@
   font-family: "Jersey 10", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+/* Ligne 1 (1-2-3)
+.rarity-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+} */
+
+
+/* Blocs */
+.rare {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 10px;
+  min-width: 120px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Style spécial rareté 5 */
+#rare5 {
+  color: gold;
+  font-weight: bold;
 }
