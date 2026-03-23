@@ -25,7 +25,7 @@ function getRarity(filename) {
 
 //  Construire les objets images avec rareté et poids
 const images = imageFiles.map(file => ({
-  src: "images/chats/" + file,
+  src: "clicchat/images/chats/" + file,
   rarity: getRarity(file),
   weight: 6 - getRarity(file)  // pondération : rareté élevée = moins de chance
 }));
