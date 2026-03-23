@@ -7,7 +7,8 @@ const imageFiles = [
   "chat-3-1.png",
   "chat-4-1.png",
   "chat-5-1.png",
-  "chat-6-1.png"
+  "chat-6-1.png",
+  "chat-7-1.png"
 ];
 
 
