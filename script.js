@@ -58,20 +58,30 @@ function getStartImage() {
 function updateDisplay(rarity) {
   counters[rarity]++;
 
+  // Raretes 1 à 3
   if (rarity <= 3) {
-    document.getElementById("r"+rarity).textContent = counters[rarity];
+    const el = document.getElementById("r" + rarity);
+    if (el) el.textContent = counters[rarity];
   }
 
+  // Rarete 4
   if (rarity === 4) {
     const el = document.getElementById("rare4");
-    el.classList.remove("hidden");
-    el.querySelector("span").textContent = counters[4];
+    if (el) {
+      el.classList.remove("hidden");
+      const span = el.querySelector("span");
+      if (span) span.textContent = counters[4];
+    }
   }
 
+  // Rarete 5
   if (rarity === 5) {
     const el = document.getElementById("rare5");
-    el.classList.remove("hidden");
-    el.querySelector("span").textContent = counters[5];
+    if (el) {
+      el.classList.remove("hidden");
+      const span = el.querySelector("span");
+      if (span) span.textContent = counters[5];
+    }
   }
 }
 
