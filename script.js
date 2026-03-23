@@ -1,33 +1,66 @@
 const img = document.getElementById("randomImage");
 
-const counters = { 1:0, 2:0, 3:0, 4:0, 5:0 };
-
-const images = [
-  { src: "images/chat-noir.png", weight: 5, rarity: 4 },
-  { src: "images/chat-noir-wink.png", weight: 5, rarity: 5 }
+//  SEULE CHOSE À MODIFIER : liste des fichiers existants
+const imageFiles = [
+  "chat-1-1.png",
+  "chat-2-1.png",
+  "chat-3-1.png",
+  "chat-4-1.png",
+  "chat-5-1.png",
+  "chat-6-1.png"
 ];
 
-function getRandomImage() {
-  const total = images.reduce((sum, img) => sum + img.weight, 0);
-  const rand = Math.random() * total;
 
-  let cumulative = 0;
-  for (let img of images) {
-    cumulative += img.weight;
-    if (rand < cumulative) return img;
-  }
+//  Extraire la rareté depuis le nom (chat-INDEX-RARETÉ.png)
+function getRarity(filename) {
+  const match = filename.match(/-(\d+)\.(png|jpg|jpeg|gif)$/);
+  // match[1] = INDEX, match[2] = extension
+  // On prend le dernier chiffre avant l’extension comme rareté
+  const rareMatch = filename.match(/-(\d+)\.(?:png|jpg|jpeg|gif)$/);
+  if (!rareMatch) return 1;
+  // rareté = dernier chiffre après dernier tiret
+  const parts = filename.split("-");
+  return parseInt(parts[parts.length -1].split(".")[0]);
 }
 
-function getCommonStartImage() {
-  const commons = images.filter(img => img.weight === 5);
+//  Construire les objets images avec rareté et poids
+const images = imageFiles.map(file => ({
+  src: "/images/chats/" + file,
+  rarity: getRarity(file),
+  weight: 6 - getRarity(file)  // pondération : rareté élevée = moins de chance
+}));
 
+//  Compteurs
+const counters = {1:0, 2:0, 3:0, 4:0, 5:0};
+
+//  Tirage pondéré
+function getRandomImage() {
+  const totalWeight = images.reduce((sum, img) => sum + img.weight, 0);
+  let rand = Math.random() * totalWeight;
+
+  for (let img of images) {
+    if (rand < img.weight) return img;
+    rand -= img.weight;
+  }
+
+  // fallback
+  return images[0];
+}
+
+//  Image de départ : rareté 1 si possible
+function getStartImage() {
+  const commons = images.filter(img => img.rarity === 1);
   if (commons.length === 0) return images[0];
-
   return commons[Math.floor(Math.random() * commons.length)];
 }
 
+//  Mise à jour compteur et affichage
 function updateDisplay(rarity) {
   counters[rarity]++;
+
+  if (rarity <= 3) {
+    document.getElementById("r"+rarity).textContent = counters[rarity];
+  }
 
   if (rarity === 4) {
     const el = document.getElementById("rare4");
@@ -42,13 +75,14 @@ function updateDisplay(rarity) {
   }
 }
 
+//  Click → nouvelle image
 img.addEventListener("click", () => {
   const selected = getRandomImage();
   img.src = selected.src;
   updateDisplay(selected.rarity);
 });
 
-// INIT
-const startImage = getCommonStartImage();
-img.src = startImage.src;
-updateDisplay(startImage.rarity);
+// 🚀 INIT
+const start = getStartImage();
+img.src = start.src;
+updateDisplay(start.rarity);
