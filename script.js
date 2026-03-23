@@ -1,33 +1,18 @@
 const img = document.getElementById("randomImage");
 
-//  SEULE CHOSE À MODIFIER : liste des fichiers existants
-const imageFiles = [
-  "chat-1-1.png",
-  "chat-2-1.png",
-  "chat-3-5.png"
+//  TU MODIFIES JUSTE ICI
+const images = [
+  { src: "images/chats/chat-1-1.png", rarity: 1 },
+  { src: "images/chats/chat-2-1.png", rarity: 3 },
+  { src: "images/chats/chat-3-5.png", rarity: 5 }
 ];
 
+//  Ajouter automatiquement le poids
+images.forEach(img => {
+  img.weight = 6 - img.rarity;
+});
 
-//  Extraire la rareté depuis le nom (chat-INDEX-RARETÉ.png)
-function getRarity(filename) {
-  const match = filename.match(/-(\d+)\.(png|jpg|jpeg|gif)$/);
-  // match[1] = INDEX, match[2] = extension
-  // On prend le dernier chiffre avant l’extension comme rareté
-  const rareMatch = filename.match(/-(\d+)\.(?:png|jpg|jpeg|gif)$/);
-  if (!rareMatch) return 1;
-  // rareté = dernier chiffre après dernier tiret
-  const parts = filename.split("-");
-  return parseInt(parts[parts.length -1].split(".")[0]);
-}
-
-//  Construire les objets images avec rareté et poids
-const images = imageFiles.map(file => ({
-  src: "images/chats/" + file,
-  rarity: getRarity(file),
-  weight: 6 - getRarity(file)  // pondération : rareté élevée = moins de chance
-}));
-
-//  Compteurs
+//  Compteurs (optionnels)
 const counters = {1:0, 2:0, 3:0, 4:0, 5:0};
 
 //  Tirage pondéré
@@ -40,56 +25,46 @@ function getRandomImage() {
     rand -= img.weight;
   }
 
-  // fallback
   return images[0];
 }
 
-//  Image de départ : rareté 1 si possible
+//  Image de départ (rareté 1)
 function getStartImage() {
   const commons = images.filter(img => img.rarity === 1);
   if (commons.length === 0) return images[0];
   return commons[Math.floor(Math.random() * commons.length)];
 }
 
-//  Mise à jour compteur et affichage
+//  Mise à jour (safe même sans HTML)
 function updateDisplay(rarity) {
   counters[rarity]++;
 
-  // Raretes 1 à 3
-  if (rarity <= 3) {
-    const el = document.getElementById("r" + rarity);
-    if (el) el.textContent = counters[rarity];
+  const el = document.getElementById("r" + rarity);
+  if (el) el.textContent = counters[rarity];
+
+  const el4 = document.getElementById("rare4");
+  if (rarity === 4 && el4) {
+    el4.classList.remove("hidden");
+    const span = el4.querySelector("span");
+    if (span) span.textContent = counters[4];
   }
 
-  // Rarete 4
-  if (rarity === 4) {
-    const el = document.getElementById("rare4");
-    if (el) {
-      el.classList.remove("hidden");
-      const span = el.querySelector("span");
-      if (span) span.textContent = counters[4];
-    }
-  }
-
-  // Rarete 5
-  if (rarity === 5) {
-    const el = document.getElementById("rare5");
-    if (el) {
-      el.classList.remove("hidden");
-      const span = el.querySelector("span");
-      if (span) span.textContent = counters[5];
-    }
+  const el5 = document.getElementById("rare5");
+  if (rarity === 5 && el5) {
+    el5.classList.remove("hidden");
+    const span = el5.querySelector("span");
+    if (span) span.textContent = counters[5];
   }
 }
 
-//  Click → nouvelle image
+//  Click
 img.addEventListener("click", () => {
   const selected = getRandomImage();
   img.src = selected.src;
   updateDisplay(selected.rarity);
 });
 
-// 🚀 INIT
+//  INIT
 const start = getStartImage();
 img.src = start.src;
 updateDisplay(start.rarity);
