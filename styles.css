@@ -10,13 +10,12 @@
   }
 }
 
-/* Supprime le rectangle bleu sur mobile */
-img, img:active, img:focus {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
+body {
+  cursor: url('images/cursor.png') 16 16, auto;
 }
-* {
-  -webkit-tap-highlight-color: transparent;
+
+.hidden {
+  display: none;
 }
 .card {
   display: flex;
@@ -29,7 +28,6 @@ img, img:active, img:focus {
   width: 100%;
   max-width: 400px;
   height: auto;
-  cursor: pointer;
 }
 
 .card h1 {
@@ -39,15 +37,16 @@ img, img:active, img:focus {
   font-style: normal;
 }
 
+
+
 /* Ligne 1 (1-2-3)
 .rarity-row {
   display: flex;
   gap: 15px;
   margin-top: 10px;
-} */
-
-
-/* Blocs */
+} 
+  
+/* Blocs
 .rare {
   padding: 8px 12px;
   border: 1px solid #ccc;
@@ -60,8 +59,8 @@ img, img:active, img:focus {
   display: none;
 }
 
-/* Style spécial rareté 5 */
+/* Style spécial rareté 5
 #rare5 {
   color: gold;
   font-weight: bold;
-}
+} */
