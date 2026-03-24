@@ -11,9 +11,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("images/background.png") repeat;
+  background: url("images/space-1500-1500.png") repeat;
   background-size: cover;
-  animation: moveBg 300s linear infinite;
+  animation: moveBg 60s linear infinite;
 }
 @keyframes moveBg {
   0% {
