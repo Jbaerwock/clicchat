@@ -11,9 +11,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-    background: url("images/background.png") repeat;
+  background: url("images/background.png") repeat;
   background-size: cover;
-
   animation: moveBg 300s linear infinite;
 }
 @keyframes moveBg {
@@ -47,6 +46,7 @@ body {
   font-family: "Jersey 10", sans-serif;
   font-weight: 400;
   font-style: normal;
+  color: #fff;
 }
 
 
