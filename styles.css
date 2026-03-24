@@ -11,6 +11,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+    background: url("images/background.png") repeat;
+  background-size: cover;
+
+  animation: moveBg 300s linear infinite;
+}
+@keyframes moveBg {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 1000px;
+  }
 }
 
 .hidden {
@@ -18,7 +30,7 @@ body {
 }
 .card {
   width: 100%;
-  max-width: 400px; /*  contrôle tout */
+  max-width: 400px; /* 👈 contrôle tout */
   container-type: inline-size;
 }
 
@@ -28,7 +40,7 @@ body {
 }
 
 .card h1 {
-  width: 100%; /*  même largeur que l'image */
+  width: 100%; /* 👈 même largeur que l'image */
   font-size: 30cqw;
   margin: 0px;
   text-align: center;
