@@ -6,7 +6,7 @@ const images = [
   { src: "images/chats/chat-2-1.png", rarity: 2 },
   { src: "images/chats/chat-3-5.png", rarity: 5 },
   { src: "images/chats/chat4.png", rarity: 3 },
-  { src: "images/chats/chat4.png", rarity: 4 }
+  { src: "images/chats/chat5.png", rarity: 4 }
 ];
 
 //  Ajouter automatiquement le poids
